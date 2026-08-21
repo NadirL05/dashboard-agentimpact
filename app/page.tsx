@@ -36,24 +36,23 @@ const PRODUCTS: Product[] = [
     domain: "hostia.agentimpact.fr",
     domainUrl: "https://hostia.agentimpact.fr",
     domainStatus: "good",
-    stripeStatus: "warn",
-    stripeLabel: "Test seulement",
+    stripeStatus: "good",
+    stripeLabel: "Live",
     stripeLinks: [
-      { plan: "Simple", amount: "150 €/mo", url: "https://buy.stripe.com/test_bJe28scVR0Va5fb9BW3ks00" },
-      { plan: "Medium", amount: "350 €/mo", url: "https://buy.stripe.com/test_eVq4gAf3ZavK0YVeWg3ks01" },
-      { plan: "Luxe", amount: "650 €/mo", url: "https://buy.stripe.com/test_bJefZi9JF6fu6jf15q3ks02" },
+      { plan: "Simple", amount: "150 €/mo", url: "https://buy.stripe.com/5kQ4gA9OC06q8Mk7S9cbC00" },
+      { plan: "Medium", amount: "350 €/mo", url: "https://buy.stripe.com/9B65kE3qe3iCd2AegxcbC01" },
+      { plan: "Luxe", amount: "650 €/mo", url: "https://buy.stripe.com/3cI14o9OC4mGaUsdctcbC02" },
     ],
     calendlyStatus: "good",
     calendlyLabel: "Branché",
     calendlyNote: "Sous les cartes tarifs, sur la home et /pricing.",
-    seoStatus: "warn",
-    seoLabel: "78 / 100",
-    seoScore: 78,
-    seoNote: "JSON-LD cassé → corrigé le 19/08. En-têtes sécurité manquants (CSP, X-Frame-Options).",
+    seoStatus: "good",
+    seoLabel: "94 / 100 perf",
+    seoScore: 94,
+    seoNote: "Refonte design (fond clair, agent-readiness, JSON-LD inline) + 3 articles /ressources publiés le 20/08. Auth = Supabase (Clerk non migré, risque jugé trop élevé sur une app avec clients réels).",
     todo: [
-      "Basculer Stripe en mode live si vente confirmée",
-      "Ajouter en-têtes de sécurité (next.config.js)",
-      "Créer les pages mentions légales / CGV / confidentialité (404 actuellement)",
+      "Créer un premier témoignage client réel (gap n°1 identifié vs concurrents)",
+      "En-têtes de sécurité (CSP) posés — à revalider après tout changement de domaine tiers",
     ],
   },
   {
@@ -61,51 +60,50 @@ const PRODUCTS: Product[] = [
     tag: "Analyse foncière & urbanisme",
     color: "var(--pluia)",
     domain: "plu-ia.agentimpact.fr",
-    domainNote: "(encore sur l'outil)",
-    domainStatus: "warn",
-    domainDetail: "Landing déployée en preview, pas encore sur le domaine public. L'outil doit migrer vers app-plu-ia.agentimpact.fr.",
-    stripeStatus: "warn",
-    stripeLabel: "Test seulement",
+    domainUrl: "https://plu-ia.agentimpact.fr",
+    domainStatus: "good",
+    stripeStatus: "good",
+    stripeLabel: "Live",
     stripeLinks: [
       { plan: "Découverte", amount: "Gratuit" },
-      { plan: "Pro", amount: "99 €/mo", url: "https://buy.stripe.com/test_dRm8wQ4pg0H55gXfZN48000" },
+      { plan: "Pro", amount: "99 €/mo", url: "https://buy.stripe.com/aFa14o4ob6cc56r8Id83C00" },
       { plan: "Entreprise", amount: "Sur mesure" },
     ],
     calendlyStatus: "good",
     calendlyLabel: "Branché",
     calendlyNote: "CTA démo + plan Entreprise.",
-    seoStatus: "warn",
-    seoLabel: "Pas encore auditable",
-    seoNote: "URL preview protégée SSO Vercel — audit prévu une fois le domaine public attaché.",
+    seoStatus: "good",
+    seoLabel: "Clerk live",
+    seoNote: "Identité \"plan cadastral\" + 3D wireframe massing. Auth Clerk basculée en clés live (app-plu-ia.agentimpact.fr). Outil (sas-plu-3d) et landing bien séparés sur leurs sous-domaines respectifs.",
     todo: [
-      "Migrer l'outil (sas-plu-3d) vers app-plu-ia.agentimpact.fr — webhooks Stripe + redirect URLs Clerk à mettre à jour côté outil",
-      "Rattacher plu-ia.agentimpact.fr à ce repo landing une fois l'outil confirmé sur le nouveau sous-domaine",
-      "Audit SEO/GEO complet une fois public",
+      "Audit SEO/GEO complet groupé avec les 2 autres produits",
+      "Reconnecter Google OAuth si besoin sur le nouveau domaine Clerk live",
     ],
   },
   {
     name: "Hector",
     tag: "Collaborateur IA · CGPI",
     color: "var(--hector)",
-    domain: "hector.agentimpact.fr (DNS manquant)",
-    domainStatus: "bad",
-    domainDetail: "Projet Vercel prêt, CNAME Cloudflare manquant — à ajouter à la main (outil MCP en échec).",
-    stripeStatus: "warn",
-    stripeLabel: "Test seulement",
+    domain: "hector.agentimpact.fr",
+    domainUrl: "https://hector.agentimpact.fr",
+    domainStatus: "good",
+    domainDetail: "app-hector.agentimpact.fr (outil) + api-hector.agentimpact.fr (API) également en ligne.",
+    stripeStatus: "good",
+    stripeLabel: "Live",
     stripeLinks: [
-      { plan: "Mensuel", amount: "149 €/mo", url: "https://buy.stripe.com/test_eVqcN65rdgYLblSaCP1Fe00" },
-      { plan: "Annuel", amount: "1 490 €/an", url: "https://buy.stripe.com/test_8x2dRabPBcIvey46mz1Fe01" },
+      { plan: "Mensuel", amount: "149 €/mo", url: "https://buy.stripe.com/28E5kE3sG8QW4Yd6QhcZa00" },
+      { plan: "Annuel", amount: "1 490 €/an", url: "https://buy.stripe.com/9B6aEYfbo5EK76l8YpcZa01" },
     ],
     calendlyStatus: "good",
-    calendlyLabel: "Branché",
-    calendlyNote: 'CTA "Voir un bilan en live".',
-    seoStatus: "warn",
-    seoLabel: "Pas encore auditable",
-    seoNote: "Même blocage : pas de domaine public.",
+    calendlyLabel: "Branché (fallback secondaire sous les CTA Stripe)",
+    calendlyNote: 'CTA principal "Commencer" (paiement direct) depuis le 21/08 — Calendly reste en option secondaire.',
+    seoStatus: "good",
+    seoLabel: "Clerk live",
+    seoNote: "Auth Clerk basculée en clés live (app-hector.agentimpact.fr) le 21/08 — CSP corrigée pour le nouveau domaine Clerk. CTA Stripe test-mode (identifié comme faille de confiance) corrigé puis re-câblé en live.",
     todo: [
-      "Ajouter le CNAME hector → cname.vercel-dns.com sur Cloudflare",
-      "Prix 149€/1490€ = hypothèse non validée commercialement — le confirmer avant de pousser du trafic payant",
-      "Audit SEO/GEO une fois public",
+      "Prix 149€/1490€ reste une hypothèse non validée commercialement, à confirmer avant scaling",
+      "Revue sécurité isolation multi-tenant avant onboarding d'un vrai cabinet (recommandation de l'audit concurrentiel)",
+      "Vérifier couverture réelle des intégrations Powens vs promesse landing",
     ],
   },
 ];
@@ -121,7 +119,7 @@ function Pill({ status, children }: { status: Status; children: React.ReactNode 
 
 export default function Dashboard() {
   const liveCount = PRODUCTS.filter((p) => p.domainStatus === "good").length;
-  const stripeLinkCount = PRODUCTS.reduce((n, p) => n + p.stripeLinks.filter((l) => l.url).length, 0);
+  const stripeLiveCount = PRODUCTS.reduce((n, p) => n + (p.stripeStatus === "good" ? p.stripeLinks.filter((l) => l.url).length : 0), 0);
   const seoAuditedCount = PRODUCTS.filter((p) => p.seoScore !== undefined).length;
 
   return (
@@ -131,7 +129,7 @@ export default function Dashboard() {
           <p className="eyebrow">AgentImpact — vue interne</p>
           <h1>Portefeuille produits</h1>
         </div>
-        <span className="updated mono">màj 19 août 2026</span>
+        <span className="updated mono">màj 21 août 2026</span>
       </header>
 
       <p className="lede">
@@ -142,8 +140,8 @@ export default function Dashboard() {
       <div className="summary-row">
         <div className="summary-cell"><div className="num mono">{PRODUCTS.length}</div><div className="label">Landings en repo dédié</div></div>
         <div className="summary-cell"><div className="num mono">{liveCount}</div><div className="label">Domaine live</div></div>
-        <div className="summary-cell"><div className="num mono">{stripeLinkCount}</div><div className="label">Payment Links (test)</div></div>
-        <div className="summary-cell"><div className="num mono">0</div><div className="label">Payment Links live</div></div>
+        <div className="summary-cell"><div className="num mono">{stripeLiveCount}</div><div className="label">Payment Links live</div></div>
+        <div className="summary-cell"><div className="num mono">3 / 3</div><div className="label">Produits Stripe live</div></div>
         <div className="summary-cell"><div className="num mono">{seoAuditedCount}</div><div className="label">Audits SEO lancés</div></div>
       </div>
 
@@ -212,7 +210,7 @@ export default function Dashboard() {
       </div>
 
       <footer className="note">
-        Tous les liens Stripe ci-dessus sont en <strong>mode test</strong> — aucun paiement réel n&apos;est possible tant qu&apos;ils ne sont pas basculés en mode live dans Stripe Dashboard. Le lien Calendly (nadir-lahyani-agentimpact/30min) est partagé sur les 3 produits.
+        Tous les liens Stripe ci-dessus sont en <strong>mode live</strong> depuis le 21/08/2026 — un paiement réel est possible sur chacun, ne pas cliquer pour tester. Le lien Calendly (nadir-lahyani-agentimpact/30min) est partagé sur les 3 produits, en fallback secondaire. Clerk est en clés live sur PLU-IA et Hector ; HostIA reste sur Supabase Auth (décision explicite, migration jugée trop risquée sur une app avec clients réels).
       </footer>
     </div>
   );
