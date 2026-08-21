@@ -49,10 +49,11 @@ const PRODUCTS: Product[] = [
     seoStatus: "good",
     seoLabel: "94 / 100 perf",
     seoScore: 94,
-    seoNote: "Refonte design (fond clair, agent-readiness, JSON-LD inline) + 3 articles /ressources publiés le 20/08. Auth = Supabase (Clerk non migré, risque jugé trop élevé sur une app avec clients réels).",
+    seoNote: "Refonte design (fond clair, agent-readiness, JSON-LD inline) + 3 articles /ressources publiés le 20/08. Auth = Supabase (Clerk non migré, risque jugé trop élevé sur une app avec clients réels). CTA tarifs corrigé le 21/08 : renvoie vers /signup plutôt que le Payment Link direct (le webhook n'active un compte qu'à partir d'un orgId posé par le flow authentifié — un paiement via lien statique brut serait orphelin).",
     todo: [
       "Créer un premier témoignage client réel (gap n°1 identifié vs concurrents)",
       "En-têtes de sécurité (CSP) posés — à revalider après tout changement de domaine tiers",
+      "Webhook Stripe live créé côté Stripe mais pas encore câblé sur Vercel (restauyacine) — bloqué par un mismatch modèle mensuel/annuel réel vs 3 tiers affichés sur la landing, à trancher avant de poser les env vars",
     ],
   },
   {
@@ -74,7 +75,7 @@ const PRODUCTS: Product[] = [
     calendlyNote: "CTA démo + plan Entreprise.",
     seoStatus: "good",
     seoLabel: "Clerk live",
-    seoNote: "Identité \"plan cadastral\" + 3D wireframe massing. Auth Clerk basculée en clés live (app-plu-ia.agentimpact.fr). Outil (sas-plu-3d) et landing bien séparés sur leurs sous-domaines respectifs.",
+    seoNote: "Identité \"plan cadastral\" + 3D wireframe massing. Auth Clerk basculée en clés live (app-plu-ia.agentimpact.fr). Outil (sas-plu-3d) et landing bien séparés sur leurs sous-domaines respectifs. CTA plan Pro corrigé le 21/08 : renvoie vers le dashboard (inscription) au lieu du Payment Link direct — même raison que HostIA, le webhook a besoin d'un userId posé par /api/stripe/checkout authentifié.",
     todo: [
       "Audit SEO/GEO complet groupé avec les 2 autres produits",
       "Reconnecter Google OAuth si besoin sur le nouveau domaine Clerk live",
@@ -101,6 +102,7 @@ const PRODUCTS: Product[] = [
     seoLabel: "Clerk live",
     seoNote: "Auth Clerk basculée en clés live (app-hector.agentimpact.fr) le 21/08 — CSP corrigée pour le nouveau domaine Clerk. CTA Stripe test-mode (identifié comme faille de confiance) corrigé puis re-câblé en live.",
     todo: [
+      "CTA \"Commencer\" reste en paiement direct (pas de flow inscription) : patrimoine n'a aucun webhook Stripe à ce jour, donc pas d'endroit où router un CTA inscription — à revoir si un flow de provisioning de compte est ajouté",
       "Prix 149€/1490€ reste une hypothèse non validée commercialement, à confirmer avant scaling",
       "Revue sécurité isolation multi-tenant avant onboarding d'un vrai cabinet (recommandation de l'audit concurrentiel)",
       "Vérifier couverture réelle des intégrations Powens vs promesse landing",
@@ -129,7 +131,7 @@ export default function Dashboard() {
           <p className="eyebrow">AgentImpact — vue interne</p>
           <h1>Portefeuille produits</h1>
         </div>
-        <span className="updated mono">màj 21 août 2026</span>
+        <span className="updated mono">màj 21 août 2026 (soir)</span>
       </header>
 
       <p className="lede">
@@ -210,7 +212,7 @@ export default function Dashboard() {
       </div>
 
       <footer className="note">
-        Tous les liens Stripe ci-dessus sont en <strong>mode live</strong> depuis le 21/08/2026 — un paiement réel est possible sur chacun, ne pas cliquer pour tester. Le lien Calendly (nadir-lahyani-agentimpact/30min) est partagé sur les 3 produits, en fallback secondaire. Clerk est en clés live sur PLU-IA et Hector ; HostIA reste sur Supabase Auth (décision explicite, migration jugée trop risquée sur une app avec clients réels).
+        Tous les liens Stripe ci-dessus sont en <strong>mode live</strong> depuis le 21/08/2026 — un paiement réel est possible sur chacun, ne pas cliquer pour tester. Le lien Calendly (nadir-lahyani-agentimpact/30min) est partagé sur les 3 produits, en fallback secondaire. Clerk est en clés live sur PLU-IA et Hector ; HostIA reste sur Supabase Auth (décision explicite, migration jugée trop risquée sur une app avec clients réels). Sur HostIA et PLU-IA, les CTA de paiement ne pointent plus vers le Payment Link direct mais vers l&apos;inscription : le paiement se fait ensuite depuis le dashboard authentifié, seul endroit où le webhook Stripe peut rattacher la transaction à un compte. Hector fait exception (paiement direct) faute de webhook côté patrimoine (l&apos;outil n&apos;a aucun code de webhook Stripe à ce jour).
       </footer>
     </div>
   );
